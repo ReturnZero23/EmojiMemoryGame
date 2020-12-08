@@ -25,7 +25,8 @@ struct EmojiMemoryGame {
         self.model.getCards()
     }
     
-    func choose() {
+    func choose(card: MemoryGame<String>.Card) {
+        print(card)
 //        model.choose()
     }
 }

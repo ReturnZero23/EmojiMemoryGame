@@ -13,13 +13,16 @@ struct ContentView: View {
     
     var body: some View {
         HStack{
-            ForEach(viewModel.getCards()){ card in
+            ForEach(viewModel.getCards()) { card in
                 CardView(card: card)
-                    .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-//                        viewModel.choose(card)
-                    })
+                    .onTapGesture(){
+                        self.viewModel.choose(card: card)
+                }
             }
         }
+            .padding()
+            .foregroundColor(Color.orange)
+            .font(Font.largeTitle)
         
     }
 }
@@ -37,12 +40,9 @@ struct CardView: View {
                     .font(Font.largeTitle)
                     .padding()
             } else {
-                RoundedRectangle(cornerRadius: 10).fill(Color.blue)
+                RoundedRectangle(cornerRadius: 10).fill(Color.yellow)
             }
         }
-        .onTapGesture(count: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/, perform: {
-            
-        })
     }
     
 }
