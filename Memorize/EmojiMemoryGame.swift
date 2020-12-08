@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct EmojiMemoryGame {
-    var model : MemoryGame<String>
+class EmojiMemoryGame: ObservableObject {
+    @Published private var model : MemoryGame<String>
     
     init() {
         model = MemoryGame<String>(numOfPairsOfCards: 2, cardContentFactory: EmojiMemoryGame.cardContentFactory)
@@ -26,7 +26,6 @@ struct EmojiMemoryGame {
     }
     
     func choose(card: MemoryGame<String>.Card) {
-        print(card)
-//        model.choose()
+        model.choose(card: card)
     }
 }
