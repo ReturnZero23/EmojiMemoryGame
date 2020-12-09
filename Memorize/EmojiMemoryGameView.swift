@@ -12,11 +12,9 @@ struct ContentView: View {
     @ObservedObject var viewModel : EmojiMemoryGame
     
     var body: some View {
-        HStack{
-            ForEach(viewModel.getCards()) { card in
-                CardView(card: card).onTapGesture(){
-                    viewModel.choose(card: card)
-                }
+        Grid(viewModel.getCards()) { card in
+            CardView(card: card).onTapGesture(){
+                self.viewModel.choose(card: card)
             }
         }
             .padding()

@@ -11,11 +11,11 @@ class EmojiMemoryGame: ObservableObject {
     @Published private var model : MemoryGame<String>
     
     init() {
-        model = MemoryGame<String>(numOfPairsOfCards: 2, cardContentFactory: EmojiMemoryGame.cardContentFactory)
+        model = MemoryGame<String>(numOfPairsOfCards: 6, cardContentFactory: EmojiMemoryGame.cardContentFactory)
     }
     
     static func cardContentFactory(index: Int) -> String{
-        let data = ["🥶","🤡"]
+        let data = ["🥶","🤡", "👻", "🎃", "☠️", "🤪"]
         return data[index]
     }
     
