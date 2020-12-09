@@ -17,8 +17,8 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View{
     }
     
     var body: some View {
-        ForEach(items) { item in
-            self.viewForItem(item)
+        GeometryReader { geometry in
+            self.body(for: GridLayout(itemCount: items.count, in: geometry.size))
         }
     }
     
@@ -33,6 +33,7 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View{
         return viewForItem(item)
             .frame(width: layout.itemSize.width, height: layout.itemSize.height)
             .position(layout.location(ofItemAt: index))
+            .padding(5)
         
     }
     
