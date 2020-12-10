@@ -29,20 +29,10 @@ struct Grid<Item, ItemView>: View where Item: Identifiable, ItemView: View{
     }
     
     func body(for item: Item, in layout: GridLayout) -> some View {
-        let index = self.index(of: item)
+        let index = items.firstIndex(matching: item)!
         return viewForItem(item)
             .frame(width: layout.itemSize.width, height: layout.itemSize.height)
             .position(layout.location(ofItemAt: index))
             .padding(5)
-        
-    }
-    
-    func index(of item : Item) -> Int {
-        for index in 0..<items.count {
-            if self.items[index].id == item.id {
-                return index
-            }
-        }
-        return 0 // bogus
     }
 }
