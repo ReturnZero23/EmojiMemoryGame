@@ -7,22 +7,24 @@
 
 import Foundation
 
-struct MemoryGame<CardContent>{
+struct MemoryGame<CardContent> where CardContent: Equatable {
     private var cards: Array<Card>
     
+    var indexOfTheOneAndOnlyFaceUpCard: Int?
+    
     struct Card : Identifiable {
-        var id: Int
         var isFaceUp : Bool = false
-        var isMatch: Bool = false
+        var isMatched: Bool = false     
         var content : CardContent
+        var id: Int
     }
     
     init(numOfPairsOfCards: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
         for pairIndex in 0..<numOfPairsOfCards {
             let content = cardContentFactory(pairIndex)
-            cards.append(Card(id:pairIndex * 2,isFaceUp: true,content: content))
-            cards.append(Card(id:pairIndex * 2 + 1,isFaceUp: false,content: content))
+            cards.append(Card(content: content, id:pairIndex * 2))
+            cards.append(Card(content: content, id:pairIndex * 2 + 1 ))
         }
     }
     
@@ -33,9 +35,21 @@ struct MemoryGame<CardContent>{
     }
     
     public mutating func choose(card: Card) {
-        print(card)
-        let choseIndex = cards.firstIndex(matching: card)!
-        self.cards[choseIndex].isFaceUp = !self.cards[choseIndex].isFaceUp
+        if let chosenIndex = cards.firstIndex(matching: card), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched {
+            if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                }
+                indexOfTheOneAndOnlyFaceUpCard = nil
+            } else {
+                for index in cards.indices {
+                    cards[index].isFaceUp = false
+                }
+                indexOfTheOneAndOnlyFaceUpCard = chosenIndex
+            }
+            self.cards[chosenIndex].isFaceUp = true
+        }
     }
     
 }
