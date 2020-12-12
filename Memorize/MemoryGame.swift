@@ -8,7 +8,7 @@
 import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    private var cards: Array<Card>
+    private(set) var cards: Array<Card>
     
     var indexOfTheOneAndOnlyFaceUpCard: Int? {
         get { cards.indices.filter{ cards[$0].isFaceUp }.only }
@@ -34,8 +34,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             cards.append(Card(content: content, id:pairIndex * 2 + 1 ))
         }
     }
-    
-    public func getCards() -> Array<Card> { cards }
     
     public mutating func choose(card: Card) {
         if let chosenIndex = cards.firstIndex(matching: card), !cards[chosenIndex].isFaceUp, !cards[chosenIndex].isMatched {

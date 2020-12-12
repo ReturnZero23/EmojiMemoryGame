@@ -35,7 +35,7 @@ struct CardView: View {
         })
     }
     
-    func body(size: CGSize) -> some View {
+    private func body(size: CGSize) -> some View {
         ZStack{
             if(self.card.isFaceUp){
                 RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)

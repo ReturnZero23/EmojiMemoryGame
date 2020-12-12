@@ -22,7 +22,7 @@ class EmojiMemoryGame: ObservableObject {
     // Mark access to the model
     
     func getCards() -> Array<MemoryGame<String>.Card> {
-        self.model.getCards()
+        self.model.cards
     }
     
     func choose(card: MemoryGame<String>.Card) {
