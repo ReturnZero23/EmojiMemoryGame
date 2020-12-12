@@ -35,35 +35,38 @@ struct CardView: View {
         })
     }
     
+    @ViewBuilder
     private func body(size: CGSize) -> some View {
-        ZStack{
-            if(self.card.isFaceUp){
-                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white)
-                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                Text(self.card.content)
-                    
-            } else {
-                if !card.isMatched {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill(Color.yellow)
-                }
+        if card.isFaceUp || !card.isMatched {
+            ZStack{
+                    Pie(startAngle: Angle.degrees(0), endAngle: Angle.degrees(270))
+                        .padding()
+                        .opacity(0.5)
+                    Text(self.card.content)
+                        .font(Font.system(size: self.fontSize(size: size)))
             }
+            .cardify(isFaceUp: card.isFaceUp)
         }
-        .font(Font.system(size: self.fontSize(size: size)))
     }
     
     func fontSize(size: CGSize) -> CGFloat {
         min(size.width, size.height) * fontScaleFactor
     }
     
-    let cornerRadius: CGFloat = 10.0
-    let edgeLineWidth: CGFloat = 3
-    let fontScaleFactor: CGFloat = 0.75
-    
+    private let fontScaleFactor: CGFloat = 0.75
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(viewModel: EmojiMemoryGame())
-            .preferredColorScheme(.dark)
+        let game = EmojiMemoryGame()
+        game.choose(card: game.getCards()[0])
+        return Group {
+            ContentView(viewModel: game)
+                .preferredColorScheme(.dark)
+            ContentView(viewModel: game)
+                .preferredColorScheme(.dark)
+        }
     }
 }
