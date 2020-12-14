@@ -39,11 +39,13 @@ struct CardView: View {
     private func body(size: CGSize) -> some View {
         if card.isFaceUp || !card.isMatched {
             ZStack{
-                Pie(startAngle: Angle.degrees(0), endAngle: Angle.degrees(270))
+                Pie(startAngle: Angle.degrees(0-90), endAngle: Angle.degrees(110-90))
                     .padding()
                     .opacity(0.5)
                 Text(self.card.content)
                     .font(Font.system(size: self.fontSize(size: size)))
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0 ))
+                    .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
             }
             .cardify(isFaceUp: card.isFaceUp)
         }
