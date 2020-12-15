@@ -11,19 +11,22 @@ struct Cardify : AnimatableModifier {
     var rotation : Double
     
     init(isFaceUp: Bool) {
+        print("init")
         rotation = isFaceUp ? 0 : 180
     }
     
     var isFaceUp : Bool {
-        rotation < 90
+        print("get isFaceUp")
+        print(rotation)
+        return rotation < 90
     }
     
-    var animatableData: Double {
-        get { return rotation }
-        set {
-            rotation = newValue
-        }
-    }
+//    var animatableData: Double {
+//        get { return rotation }
+//        set {
+//            rotation = newValue
+//        }
+//    }
     
     func body(content: Content) -> some View {
         ZStack{
