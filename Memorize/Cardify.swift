@@ -11,8 +11,7 @@ struct Cardify : AnimatableModifier {
     var rotation : Double
     
     init(isFaceUp: Bool) {
-        print(isFaceUp)
-        rotation = isFaceUp ? 50 : 180
+        rotation = isFaceUp ? 0 : 180
     }
     
     var isFaceUp : Bool {
@@ -23,7 +22,6 @@ struct Cardify : AnimatableModifier {
         get { return rotation }
         set {
             rotation = newValue
-            print(newValue)
         }
     }
     
