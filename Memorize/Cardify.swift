@@ -11,7 +11,8 @@ struct Cardify : AnimatableModifier {
     var rotation : Double
     
     init(isFaceUp: Bool) {
-        rotation = isFaceUp ? 0 : 180
+        print(isFaceUp)
+        rotation = isFaceUp ? 50 : 180
     }
     
     var isFaceUp : Bool {
@@ -20,7 +21,10 @@ struct Cardify : AnimatableModifier {
     
     var animatableData: Double {
         get { return rotation }
-        set { rotation = newValue }
+        set {
+            rotation = newValue
+            print(newValue)
+        }
     }
     
     func body(content: Content) -> some View {
