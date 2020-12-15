@@ -15,7 +15,7 @@ struct ContentView: View {
         VStack {
             Grid(viewModel.getCards()) { card in
                 CardView(card: card).onTapGesture(){
-                    withAnimation(Animation.linear(duration: 0.75)) {
+                    withAnimation(Animation.linear(duration: 0.75).repeatCount(3)) {
                         self.viewModel.choose(card: card)
                     }
                 }

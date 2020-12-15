@@ -21,6 +21,7 @@ struct Cardify : AnimatableModifier {
     var animatableData: Double {
         get { return rotation }
         set {
+            print(newValue)
             rotation = newValue
         }
     }
